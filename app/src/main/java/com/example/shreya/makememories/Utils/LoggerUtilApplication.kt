@@ -1,4 +1,4 @@
-package com.example.shreya.makememories
+package com.example.shreya.makememories.Utils
 
 import android.app.Application
 import timber.log.Timber

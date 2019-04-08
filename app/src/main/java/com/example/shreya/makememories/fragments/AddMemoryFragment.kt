@@ -1,4 +1,4 @@
-package com.example.shreya.makememories
+package com.example.shreya.makememories.fragments
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -7,15 +7,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentAddMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
 import com.example.shreya.makememories.room.MemoryViewModel

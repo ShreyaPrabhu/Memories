@@ -1,4 +1,4 @@
-package com.example.shreya.makememories
+package com.example.shreya.makememories.adapters
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shreya.makememories.R
 import com.example.shreya.makememories.room.MemoryEntity
 import timber.log.Timber
 

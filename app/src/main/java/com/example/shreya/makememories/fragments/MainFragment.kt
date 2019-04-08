@@ -1,4 +1,4 @@
-package com.example.shreya.makememories
+package com.example.shreya.makememories.fragments
 
 import android.Manifest
 import android.content.Intent
@@ -6,10 +6,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shreya.makememories.R
+import com.example.shreya.makememories.adapters.RecyclerAdapter
 import com.example.shreya.makememories.databinding.FragmentMainBinding
 import com.example.shreya.makememories.room.MemoryEntity
 import com.example.shreya.makememories.room.MemoryViewModel
