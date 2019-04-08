@@ -1,7 +1,6 @@
 package com.example.shreya.makememories.room;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -10,7 +9,6 @@ import androidx.room.RoomDatabase;
 public abstract class MemoryDatabase extends RoomDatabase {
     private static MemoryDatabase memoryDatabase;
     public abstract MemoryDao memoryDao();
-    private Context context;
     public static MemoryDatabase getInstance(Context context){
         if(memoryDatabase== null){
             memoryDatabase = Room.databaseBuilder(context.getApplicationContext(), MemoryDatabase.class, "Memory-database")

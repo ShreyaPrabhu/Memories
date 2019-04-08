@@ -13,7 +13,6 @@ import timber.log.Timber
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.MemoryHolder>() {
     private var memoryEntitys: List<MemoryEntity> = ArrayList()
     private var listener: ((item: MemoryEntity) -> Unit)? = null
-    private var onLonglistener: ((item: MemoryEntity) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (item:MemoryEntity ) -> Unit) {
         this.listener = listener

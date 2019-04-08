@@ -17,14 +17,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
 import com.example.shreya.makememories.databinding.FragmentMainBinding
 import com.example.shreya.makememories.room.MemoryEntity
 import com.example.shreya.makememories.room.MemoryViewModel
-import kotlinx.android.synthetic.main.activity_main.view.*
 import timber.log.Timber
-
 
 class MainFragment : Fragment() {
 
