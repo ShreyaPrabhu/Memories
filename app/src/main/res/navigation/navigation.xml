@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/mainFragment2">
+
+
+    <fragment
+        android:id="@+id/mainFragment2"
+        android:name="com.example.shreya.makememories.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment2_to_addMemoryFragment2"
+            app:destination="@id/addMemoryFragment2" />
+        <action
+            android:id="@+id/action_mainFragment2_to_aboutFragment2"
+            app:destination="@id/aboutFragment2" />
+        <action
+            android:id="@+id/action_mainFragment2_to_memoryFragment"
+            app:destination="@id/memoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment2"
+        android:name="com.example.shreya.makememories.AboutFragment"
+        android:label="AboutFragment" >
+        <action
+            android:id="@+id/action_aboutFragment2_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addMemoryFragment2"
+        android:name="com.example.shreya.makememories.AddMemoryFragment"
+        android:label="AddMemoryFragment" >
+        <action
+            android:id="@+id/action_addMemoryFragment2_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoryFragment"
+        android:name="com.example.shreya.makememories.MemoryFragment"
+        android:label="MemoryFragment" >
+        <action
+            android:id="@+id/action_memoryFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
+
+</navigation>
