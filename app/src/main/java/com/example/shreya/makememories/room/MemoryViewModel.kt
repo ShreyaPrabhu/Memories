@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 class MemoryViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    private var repository: MemoryRepository = MemoryRepository( application)
-    private var allNotes: LiveData<List<MemoryEntity>>  = repository.getAllMemos()
+    private val repository: MemoryRepository = MemoryRepository( application)
+    private val allNotes: LiveData<List<MemoryEntity>>  = repository.getAllMemos()
 
 
     fun insert(memoryEntity: MemoryEntity) {
