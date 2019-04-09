@@ -19,5 +19,5 @@ data class MemoryEntity(
 {
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "memory_id")
-        val id: Int = 0
+        var id: Int = 0
 }
