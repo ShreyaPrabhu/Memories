@@ -1,9 +1,9 @@
-package com.example.shreya.makememories.Utils
+package com.example.shreya.makememories
 
 import android.app.Application
 import timber.log.Timber
 
-class LoggerUtilApplication : Application() {
+class MakeMemoriesApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
