@@ -8,7 +8,6 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
@@ -59,7 +58,8 @@ class MemoryFragment : Fragment() {
             val memoryViewModel: MemoryViewModel
             memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
             memoryViewModel.deleteMemoryById(memoryEntity.id.toLong())
-            view!!.findNavController().navigate(R.id.action_memoryFragment_to_mainFragment2)
+            Thread.sleep(100)
+            fragmentManager!!.popBackStack()
             true
         } else super.onOptionsItemSelected(item)
 

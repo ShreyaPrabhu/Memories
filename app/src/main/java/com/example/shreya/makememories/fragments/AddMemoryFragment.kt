@@ -15,7 +15,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentAddMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
@@ -62,8 +61,8 @@ class AddMemoryFragment : Fragment() {
                 memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
                 memoryViewModel.insert(memoryEntity)
                 Toast.makeText(requireContext(), "Data Saved!!!", Toast.LENGTH_SHORT).show()
-
-                view!!.findNavController().navigate(R.id.action_addMemoryFragment2_to_mainFragment2)
+                Thread.sleep(100)
+                fragmentManager!!.popBackStack()
             }
         }
 
