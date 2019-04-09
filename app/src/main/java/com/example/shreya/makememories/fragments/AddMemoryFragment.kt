@@ -48,7 +48,9 @@ class AddMemoryFragment : Fragment() {
 
         binding.addImageButton.setOnClickListener{
             // TODO: Save data into database
-            if(binding.imageCaption.text.toString().equals("") || binding.imageCaption.equals(null)  || binding.imageCaption.text.toString().equals("Image Caption") || binding.imageDescription.text.toString().equals("") || binding.imageDescription.equals(null) || binding.imageDescription.text.toString().equals("Image Description")){
+            //if(binding.imageCaption.text.toString().equals("") || binding.imageCaption.equals(null)  || binding.imageCaption.text.toString().equals("Image Caption") || binding.imageDescription.text.toString().equals("") || binding.imageDescription.equals(null) || binding.imageDescription.text.toString().equals("Image Description")){
+            if(binding.imageCaption.text.toString().isEmpty()  || binding.imageCaption.text.toString().equals("Image Caption")
+                    || binding.imageDescription.text.toString().isEmpty() || binding.imageDescription.text.toString().equals("Image Description")){
                 // Show Alert
                 Toast.makeText(requireContext(), "Show alert!!!", Toast.LENGTH_SHORT).show()
             }
