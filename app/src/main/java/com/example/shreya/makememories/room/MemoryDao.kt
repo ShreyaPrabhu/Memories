@@ -13,7 +13,7 @@ interface MemoryDao {
     fun update(memory: MemoryEntity)
 
     @Query("SELECT * from memories_table WHERE memory_id = :key")
-    fun get(key: Long): MemoryEntity?
+    fun get(key: Long): MemoryEntity
 
     @Query("DELETE FROM memories_table")
     fun clear()

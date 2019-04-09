@@ -36,7 +36,7 @@ class MemoryRepository(application: Application) {
         return memoryDao.getSize()
     }
 
-    fun getMemById(key: Long) : MemoryEntity? {
+    fun getMemById(key: Long) : MemoryEntity{
         return memoryDao.get(key)
     }
 

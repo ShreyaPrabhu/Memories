@@ -1,6 +1,8 @@
 package com.example.shreya.makememories.fragments
 
+import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -15,7 +17,7 @@ import com.example.shreya.makememories.room.MemoryViewModel
 class MemoryFragment : Fragment() {
 
     private lateinit var binding: FragmentMemoryBinding
-    private var memoryEntity: MemoryEntity? = null
+    private lateinit var memoryEntity: MemoryEntity
     private lateinit var memoryViewModel: MemoryViewModel
 
 
@@ -35,9 +37,13 @@ class MemoryFragment : Fragment() {
 
         if (memory_id != null) memoryEntity = memoryViewModel.getMemoryById(memory_id.toLong())
 
-        binding.imageSelected.setImageBitmap(BitmapFactory.decodeFile(memoryEntity!!.imageReference))
-        binding.imageCaption.text = memoryEntity!!.imageCaption
-        binding.imageDescription.text = memoryEntity!!.imageDescription
+        binding.imageSelected.setImageBitmap(BitmapFactory.decodeFile(memoryEntity.imageReference))
+        binding.imageCaption.text = memoryEntity.imageCaption
+        binding.imageDescription.text = memoryEntity.imageDescription
+
+        binding.fabShare.setOnClickListener{view: View->
+            shareMemory(memoryEntity);
+        }
 
         return binding.root
     }
@@ -52,10 +58,20 @@ class MemoryFragment : Fragment() {
             // Delete image here
             val memoryViewModel: MemoryViewModel
             memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
-            memoryViewModel.deleteMemoryById(memoryEntity!!.id.toLong())
+            memoryViewModel.deleteMemoryById(memoryEntity.id.toLong())
             view!!.findNavController().navigate(R.id.action_memoryFragment_to_mainFragment2)
             true
         } else super.onOptionsItemSelected(item)
 
     }
+
+    private fun shareMemory(memoryEntity: MemoryEntity){
+        val pictureUri = Uri.parse(memoryEntity.imageReference.toString())
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.putExtra(Intent.EXTRA_STREAM, pictureUri)
+        shareIntent.putExtra(Intent.EXTRA_TEXT, memoryEntity.imageCaption + " - " + memoryEntity.imageDescription)
+        shareIntent.type = "image/png";
+        startActivity(Intent.createChooser(shareIntent,"Share with"));
+    }
+
 }

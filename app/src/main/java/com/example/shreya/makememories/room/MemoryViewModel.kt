@@ -27,7 +27,7 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
         return repository.getSize()
     }
 
-    fun getMemoryById(key: Long): MemoryEntity? {
+    fun getMemoryById(key: Long): MemoryEntity {
         return repository.getMemById(key)
     }
 

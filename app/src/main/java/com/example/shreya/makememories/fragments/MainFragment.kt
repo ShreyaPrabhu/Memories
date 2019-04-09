@@ -1,7 +1,6 @@
 package com.example.shreya.makememories.fragments
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -86,18 +85,6 @@ class MainFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun getShareIntent() : Intent {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, "My image, image caption and image description")
-        return shareIntent
-    }
-
-    // Call this on long press on the specific image and pass required arguments as well
-    private fun shareMemory() {
-        startActivity(getShareIntent())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
