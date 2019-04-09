@@ -52,8 +52,9 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Room components
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
-    kapt 'android.arch.persistence.room:compiler:1.1.1'
+    implementation "androidx.room:room-runtime:2.1.0-alpha06"
+    kapt "androidx.room:room-compiler:2.1.0-alpha06"
+
 
     // Lifecycle components
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
