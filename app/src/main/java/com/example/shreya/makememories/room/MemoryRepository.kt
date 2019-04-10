@@ -1,14 +1,15 @@
 package com.example.shreya.makememories.room
 
 import android.app.Application
-import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MemoryRepository(application: Application) {
 
     private var memoryDao: MemoryDao
-
     private var allMemories: LiveData<List<MemoryEntity>>
+
 
     init {
         val database: MemoryDatabase = MemoryDatabase.getInstance(
@@ -18,14 +19,18 @@ class MemoryRepository(application: Application) {
         allMemories = memoryDao.getAllMemories()
     }
 
-    fun insert(memoryEntity: MemoryEntity) {
-        val insertMemoAsyncTask = InsertMemoAsyncTask(memoryDao).execute(memoryEntity)
+    suspend fun insert(memoryEntity: MemoryEntity) {
+        return withContext(Dispatchers.IO) {
+            val memoDao = memoryDao
+            memoDao.insert(memoryEntity)
+        }
     }
 
-    fun deleteAllMemos() {
-        val deleteAllMemosAsyncTask = DeleteAllMemosAsyncTask(
-                memoryDao
-        ).execute()
+    suspend fun deleteAllMemos(){
+        return withContext(Dispatchers.IO) {
+            val memoDao = memoryDao
+            memoDao.clear()
+        }
     }
 
     fun getAllMemos(): LiveData<List<MemoryEntity>> {
@@ -42,21 +47,6 @@ class MemoryRepository(application: Application) {
 
     fun deleteMemById(key: Long){
         return memoryDao.deleteById(key)
-    }
-
-    private class InsertMemoAsyncTask(memoryDao: MemoryDao) : AsyncTask<MemoryEntity, Unit, Unit>() {
-        val memoDao = memoryDao
-
-        override fun doInBackground(vararg p0: MemoryEntity?) {
-            memoDao.insert(p0[0]!!)
-        }
-    }
-
-    private class DeleteAllMemosAsyncTask(val memoDao: MemoryDao) : AsyncTask<Unit, Unit, Unit>() {
-
-        override fun doInBackground(vararg p0: Unit?) {
-            memoDao.clear()
-        }
     }
 
 }

@@ -62,4 +62,7 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:28.1.0'
     implementation 'com.android.support:appcompat-v7:28.1.0'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0"
 }
