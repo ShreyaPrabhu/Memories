@@ -31,7 +31,7 @@ class AddMemoryFragment : Fragment() {
     // Image selection criteria variables
     private val GALLERY = 1
     private val CAMERA = 2
-    private lateinit var imagePath: String
+    private var imagePath: String = R.string.image_path.toString()
     private lateinit var memoryViewModel: MemoryViewModel
 
     private lateinit var binding: FragmentAddMemoryBinding
@@ -51,9 +51,10 @@ class AddMemoryFragment : Fragment() {
             // TODO: Save data into database
             //if(binding.imageCaption.text.toString().equals("") || binding.imageCaption.equals(null)  || binding.imageCaption.text.toString().equals("Image Caption") || binding.imageDescription.text.toString().equals("") || binding.imageDescription.equals(null) || binding.imageDescription.text.toString().equals("Image Description")){
             if(binding.imageCaption.text.toString().isEmpty()  || binding.imageCaption.text.toString().equals("Image Caption")
-                    || binding.imageDescription.text.toString().isEmpty() || binding.imageDescription.text.toString().equals("Image Description")){
+                    || binding.imageDescription.text.toString().isEmpty() || binding.imageDescription.text.toString().equals("Image Description")
+                    || imagePath.equals(R.string.image_path.toString())){
                 // Show Alert
-                Toast.makeText(requireContext(), "Show alert!!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "All fields required!!!", Toast.LENGTH_SHORT).show()
             }
             else{
                 // Save into DB

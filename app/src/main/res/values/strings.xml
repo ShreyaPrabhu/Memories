@@ -18,4 +18,5 @@
     <string name="image_selected">image_selected</string>
     <string name="delete">delete</string>
     <string name="memory_deleted">Memory Deleted Successfully</string>
+    <string name="image_path">drawable/memo.jpg</string>
 </resources>
