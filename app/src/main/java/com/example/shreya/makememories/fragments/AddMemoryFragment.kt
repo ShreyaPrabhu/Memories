@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentAddMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
 import com.example.shreya.makememories.room.MemoryViewModel
+import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -58,9 +58,8 @@ class AddMemoryFragment : Fragment() {
             }
             else{
                 // Save into DB
-
                 val memoryEntity: MemoryEntity = MemoryEntity(imagePath,binding.imageCaption.text.toString(), binding.imageDescription.text.toString())
-                Log.i("tag","Memory: " +"memoryentity: " + memoryEntity.id + imagePath + memoryEntity.imageCaption + memoryEntity.imageDescription)
+                Timber.i("""Memory: memoryentity: ${memoryEntity.id}$imagePath${memoryEntity.imageCaption}${memoryEntity.imageDescription}""")
                 memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
                 memoryViewModel.insert(memoryEntity)
                 Toast.makeText(requireContext(), "Memory Saved!!!", Toast.LENGTH_SHORT).show()
@@ -146,7 +145,7 @@ class AddMemoryFragment : Fragment() {
         val wallpaperDirectory = File(
                 (Environment.getExternalStorageDirectory()).toString() + IMAGE_DIRECTORY)
         // have the object build the directory structure, if needed.
-        Log.d("fee",wallpaperDirectory.toString())
+        Timber.i(wallpaperDirectory.toString())
         if (!wallpaperDirectory.exists())
         {
 
@@ -155,7 +154,7 @@ class AddMemoryFragment : Fragment() {
 
         try
         {
-            Log.d("heel",wallpaperDirectory.toString())
+            Timber.i(wallpaperDirectory.toString())
             val f = File(wallpaperDirectory, ((Calendar.getInstance()
                     .getTimeInMillis()).toString() + ".jpg"))
             f.createNewFile()
@@ -165,7 +164,7 @@ class AddMemoryFragment : Fragment() {
                     arrayOf(f.getPath()),
                     arrayOf("image/jpeg"), null)
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
+            Timber.i("File Saved::--->%s", f.getAbsolutePath())
 
 
             return f.getAbsolutePath()

@@ -3,7 +3,6 @@ package com.example.shreya.makememories.fragments
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -47,7 +46,7 @@ class MainFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
-        Log.i("tag","Fragment" + "Size: " + memoryViewModel.getSize())
+        Timber.i("%s %s", "FragmentSize: ", memoryViewModel.getSize())
         memoryViewModel.getAllMemos().observe(this,
                 Observer<List<MemoryEntity>> { t -> adapter.setMemos(t!!) })
         adapter.setOnItemClickListener { it ->
