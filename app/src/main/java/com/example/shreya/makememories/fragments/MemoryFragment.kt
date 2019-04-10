@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -58,8 +59,9 @@ class MemoryFragment : Fragment() {
             val memoryViewModel: MemoryViewModel
             memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
             memoryViewModel.deleteMemoryById(memoryEntity.id.toLong())
-            Thread.sleep(100)
-            fragmentManager!!.popBackStack()
+            Handler().postDelayed({
+                fragmentManager?.popBackStack()
+            }, 200)
             true
         } else super.onOptionsItemSelected(item)
 

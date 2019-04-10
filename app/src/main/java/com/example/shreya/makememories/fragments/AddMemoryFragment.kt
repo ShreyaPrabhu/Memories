@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,6 +39,7 @@ class AddMemoryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+
         binding = DataBindingUtil.inflate<FragmentAddMemoryBinding>(
                 inflater, R.layout.fragment_add_memory, container, false)
 
@@ -61,8 +63,10 @@ class AddMemoryFragment : Fragment() {
                 memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
                 memoryViewModel.insert(memoryEntity)
                 Toast.makeText(requireContext(), "Data Saved!!!", Toast.LENGTH_SHORT).show()
-                Thread.sleep(100)
-                fragmentManager!!.popBackStack()
+                Handler().postDelayed({
+                    fragmentManager?.popBackStack()
+                }, 200)
+
             }
         }
 
