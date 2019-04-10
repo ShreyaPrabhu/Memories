@@ -62,7 +62,7 @@ class AddMemoryFragment : Fragment() {
                 Log.i("tag","Memory: " +"memoryentity: " + memoryEntity.id + imagePath + memoryEntity.imageCaption + memoryEntity.imageDescription)
                 memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
                 memoryViewModel.insert(memoryEntity)
-                Toast.makeText(requireContext(), "Data Saved!!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Memory Saved!!!", Toast.LENGTH_SHORT).show()
                 Handler().postDelayed({
                     fragmentManager?.popBackStack()
                 }, 200)
