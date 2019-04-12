@@ -19,7 +19,8 @@ import com.example.shreya.makememories.R
 import com.example.shreya.makememories.adapters.RecyclerAdapter
 import com.example.shreya.makememories.databinding.FragmentMainBinding
 import com.example.shreya.makememories.room.MemoryEntity
-import com.example.shreya.makememories.room.MemoryViewModel
+import com.example.shreya.makememories.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 class MainFragment : Fragment() {
@@ -27,7 +28,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private val REQUEST_CODE = 101
 
-    private lateinit var memoryViewModel: MemoryViewModel
+    private lateinit var mainViewModel: MainViewModel
     private val adapter = RecyclerAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -45,15 +46,30 @@ class MainFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
-        memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel::class.java)
-        Timber.i("%s %s", "FragmentSize: ", memoryViewModel.getSize())
-        memoryViewModel.getAllMemos().observe(this,
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        Timber.i("%s %s", "FragmentSize: ", mainViewModel.getSize())
+        mainViewModel.getAllMemos().observe(this,
                 Observer<List<MemoryEntity>> { t -> adapter.setMemos(t!!) })
         adapter.setOnItemClickListener { it ->
             val bundle = Bundle()
             bundle.putInt("memory_id", it.id)
             this.findNavController().navigate(R.id.action_mainFragment2_to_memoryFragment, bundle)
         }
+
+        MainViewModel.showSnackBarEvent.observe(this, Observer {
+            if (it == true) { // Observed state is true.
+                val snackbar = Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        getString(R.string.memory_deleted),
+                        Snackbar.LENGTH_LONG)
+                snackbar.setAction(R.string.undo, View.OnClickListener() {
+                    val memoryEntity = MainViewModel.getMemoryEntityToUndo
+                    mainViewModel.insert(memoryEntity)
+                })
+                snackbar.show()
+                MainViewModel.doneShowingSnackBarEvent()
+            }
+        })
 
         return binding.root
     }

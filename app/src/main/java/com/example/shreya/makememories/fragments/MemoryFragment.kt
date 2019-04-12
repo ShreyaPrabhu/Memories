@@ -8,13 +8,11 @@ import android.os.Handler
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
-import com.example.shreya.makememories.room.MemoryViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.example.shreya.makememories.viewmodel.MemoryViewModel
 
 class MemoryFragment : Fragment() {
 
@@ -46,18 +44,6 @@ class MemoryFragment : Fragment() {
         binding.fabShare.setOnClickListener{view: View->
             shareMemory(memoryEntity);
         }
-
-        memoryViewModel.showSnackBarEvent.observe(this, Observer {
-            if(it == true){
-                Snackbar.make(
-                        activity!!.findViewById(android.R.id.content),
-                        getString(R.string.memory_deleted),
-                        Snackbar.LENGTH_LONG
-                ).show()
-                memoryViewModel.doneShowingSnackBarEvent()
-            }
-        })
-
         return binding.root
     }
 

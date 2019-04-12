@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.shreya.makememories.R
 import com.example.shreya.makememories.databinding.FragmentAddMemoryBinding
 import com.example.shreya.makememories.room.MemoryEntity
-import com.example.shreya.makememories.room.MemoryViewModel
+import com.example.shreya.makememories.viewmodel.MemoryViewModel
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
