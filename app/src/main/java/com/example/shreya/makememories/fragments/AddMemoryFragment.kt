@@ -31,8 +31,9 @@ class AddMemoryFragment : Fragment() {
     // Image selection criteria variables
     private val GALLERY = 1
     private val CAMERA = 2
-    private var imagePath: String = R.string.image_path.toString()
+    private var imagePath: String? = null
     private lateinit var memoryViewModel: MemoryViewModel
+    lateinit var currentPhotoPath: String
 
     private lateinit var binding: FragmentAddMemoryBinding
 
@@ -52,7 +53,7 @@ class AddMemoryFragment : Fragment() {
             //if(binding.imageCaption.text.toString().equals("") || binding.imageCaption.equals(null)  || binding.imageCaption.text.toString().equals("Image Caption") || binding.imageDescription.text.toString().equals("") || binding.imageDescription.equals(null) || binding.imageDescription.text.toString().equals("Image Description")){
             if(binding.imageCaption.text.toString().isEmpty()  || binding.imageCaption.text.toString().equals("Image Caption")
                     || binding.imageDescription.text.toString().isEmpty() || binding.imageDescription.text.toString().equals("Image Description")
-                    || imagePath.equals(R.string.image_path.toString())){
+                    || imagePath.isNullOrEmpty()){
                 // Show Alert
                 Toast.makeText(requireContext(), "All fields required!!!", Toast.LENGTH_SHORT).show()
             }
@@ -103,10 +104,6 @@ class AddMemoryFragment : Fragment() {
     public override fun onActivityResult(requestCode:Int, resultCode:Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
-        /* if (resultCode == this.RESULT_CANCELED)
-         {
-         return
-         }*/
         if (requestCode == GALLERY)
         {
             if (data != null)
@@ -130,7 +127,7 @@ class AddMemoryFragment : Fragment() {
         }
         else if (requestCode == CAMERA)
         {
-            val thumbnail = data!!.extras!!.get("data") as Bitmap
+            val thumbnail = data?.getExtras()?.get("data") as Bitmap;
             binding.invalidateAll()
             binding.imageUploaded.setImageBitmap(thumbnail)
             //move to fragment
@@ -141,7 +138,7 @@ class AddMemoryFragment : Fragment() {
 
     fun saveImage(myBitmap: Bitmap):String {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes)
         val wallpaperDirectory = File(
                 (Environment.getExternalStorageDirectory()).toString() + IMAGE_DIRECTORY)
         // have the object build the directory structure, if needed.
@@ -156,13 +153,13 @@ class AddMemoryFragment : Fragment() {
         {
             Timber.i(wallpaperDirectory.toString())
             val f = File(wallpaperDirectory, ((Calendar.getInstance()
-                    .getTimeInMillis()).toString() + ".jpg"))
+                    .getTimeInMillis()).toString() + ".png"))
             f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(context,
                     arrayOf(f.getPath()),
-                    arrayOf("image/jpeg"), null)
+                    arrayOf("image/png"), null)
             fo.close()
             Timber.i("File Saved::--->%s", f.getAbsolutePath())
 
